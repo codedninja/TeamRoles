@@ -1,14 +1,26 @@
 {
     "name": "tehcodedninja/teamroles",
+    "type": "library",
     "description": "Team Roles expansion on mpociot/teamwork",
+    "keywords": ["teamwork","teamroles","roles"],
+    "homepage": "https://github.com/tehcodedninja/TeamRoles",
+    "license": "MIT",
     "authors": [
         {
             "name": "Michael Pivonka",
-            "email": "m.pivonka@codedninja.com"
+            "email": "m.pivonka@codedninja.com",
+            "homepage": "http://codedninja.com/",
+            "role": "Developer"
         }
     ],
+    "autoload": {
+        "psr-0": {
+            "Tehcodedninja\\Teamroles": "src/"
+        }
+    },
     "minimum-stability": "dev",
     "require": {
-    	"mpociot/teamwork": "~4.0"
+    	"mpociot/teamwork": "~4.0",
+            "laravel/framework": "~5.3"
     }
 }
