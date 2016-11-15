@@ -1,0 +1,14 @@
+{
+    "name": "tehcodedninja/teamroles",
+    "description": "Team Roles expansion on mpociot/teamwork",
+    "authors": [
+        {
+            "name": "Michael Pivonka",
+            "email": "m.pivonka@codedninja.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+    	"mpociot/teamwork": "~4.0"
+    }
+}
