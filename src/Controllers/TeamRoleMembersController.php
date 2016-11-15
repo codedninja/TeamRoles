@@ -14,7 +14,7 @@ class TeamRoleMembersController extends Controller
     function show($id)
     {
         $team = Team::findOrFail($id);
-        return view('teamroles.members.list')->with('team', $team);
+        return view('teamroles::members.list')->with('team', $team);
     }
 
     function edit($team_id, $user_id)
@@ -23,7 +23,7 @@ class TeamRoleMembersController extends Controller
         $user = User::findOrFail($user_id);
         $roles = TeamRole::where('id', '!=', Config::get('teamroles.default_owner_role'))->get();
 
-        return view('teamroles.members.edit')
+        return view('teamroles::members.edit')
             ->with('team', $team)
             ->with('user', $user)
             ->with('roles', $roles);

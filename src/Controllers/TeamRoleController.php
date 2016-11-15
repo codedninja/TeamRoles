@@ -13,12 +13,12 @@ class TeamRoleController extends Controller
     function index()
     {
         $teams = Auth::user()->teams;
-        return view('teamroles.index')->with('teams', $teams);
+        return view('teamroles::index')->with('teams', $teams);
     }   
 
     function create()
     {
-        return view('teamroles.create');
+        return view('teamroles::create');
     }
 
     function store(Request $request)
@@ -42,7 +42,7 @@ class TeamRoleController extends Controller
             abort(403);
         }
 
-        return view('teamroles.edit')->with('team', $team);
+        return view('teamroles::edit')->with('team', $team);
     }
 
     function update(Request $request, $id)
