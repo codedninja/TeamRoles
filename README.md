@@ -130,4 +130,4 @@ The demo provides you everything like TeamWork does but with the ability to assi
 * Team Role creation / editing / deletion
 * Change members' role
 
-To get started, take a look at the new installed `/teamroles` and `/admin/teamroles' in your project.
+To get started, take a look at the new installed `/teamroles` and `/admin/teamroles` in your project.
