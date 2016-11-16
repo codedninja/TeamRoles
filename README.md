@@ -72,7 +72,7 @@ class User extends Model {
 }
 ```
 
-This will enable the relation with `TeamRoles` and add the following methods `teamRoles()`, `teamRoleFor($team)` `isOwnerOfTeam($team)`, `CurrentTeamRole()`, `isTeamRole($team_role)`, `detachTeamRole($team)`, `attachTeamRole($team_role, $team)` within your `User` model.
+This will enable the relation with `TeamRoles` and add the following methods `teamRoles()`, `teamRoleFor($team)` `isOwnerOfTeam($team)`, `CurrentTeamRole()`, `isTeamRole($team_role)`, `updateTeamRole($team_role, $team)` within your `User` model.
 
 Don't forget to dump composer autoload
 
