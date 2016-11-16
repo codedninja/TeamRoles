@@ -7,6 +7,13 @@ use Illuminate\Support\ServiceProvider;
 
 class TeamRoleProvider extends ServiceProvider
 {
+
+    protected $listen = [
+        \Mpociot\Teamwork\Events\UserJoinedTeam::class => [
+            Tehcodedninja\Teamroles\Listeners\JoinedTeamListener::class,
+        ]
+    ];
+
     /**
      * Bootstrap the application services.
      *

@@ -13,7 +13,7 @@ Pull this package in through Composer (file `composer.json`).
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "tehcodedninja/teamroles": "1.0.1-alpha"
+        "tehcodedninja/teamroles": "1.1.0"
     }
 }
 ```
@@ -53,26 +53,6 @@ And also run migrations.
     php artisan migrate
 
 ### Models
-
-#### Team
-
-Add the `TeamHasTeamRoles;` trait to your existing Team model:
-
-```php
-<?php namespace App;
-
-use Mpociot\Teamwork\TeamworkTeam;
-use Tehcodedninja\Teamroles\Traits\TeamHasTeamRoles;
-
-class Team extends TeamworkTeam
-{
-    use TeamHasTeamRoles;
-}
-```
-
-The `Team` model has one function:
-
-- `userRoles` &mdash; Reference to the User model that has roles associated to the team.
 
 #### User
 

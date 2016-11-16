@@ -12,7 +12,7 @@
                             {!! csrf_field() !!}
 
                             <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Name</label>
+                                <label class="col-md-4 control-label">Role</label>
 
                                 <div class="col-md-6">
                                     <select name="role" class="form-control" value="{{ old('role', $team->role) }}">

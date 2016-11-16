@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Config;
 use Mpociot\Teamwork\Exceptions\UserNotInTeamException;
+use Tehcodedninja\Teamroles\Models\TeamRole;
 
 trait UsedByUsers
 {
@@ -21,7 +22,7 @@ trait UsedByUsers
      */
     public function teamRoles()
     {
-        return $this->belongsToMany('Tehcodedninja\Teamroles\Models\TeamRole')->withPivot('team_id');
+        return $this->belongsToMany('Tehcodedninja\Teamroles\Models\TeamRole', \Config::get( 'teamwork.team_user_table' ))->withPivot('team_id');
     }
 
     /**
@@ -79,49 +80,18 @@ trait UsedByUsers
     }
 
     /**
-     * Remove an user's role from a team
+     * Update user's role in a team
      *
+     * @param integer $team_role
      * @param mixed $team
      * @return \App\User
      */
-    public function detachTeamRole($team_id)
+    public function updateTeamRole($team_role, $team = null)
     {
-        $team_id = $this->retrieveTeamId($team_id);
+        // Get Team Model instance
+        $team_id = $this->retrieveTeamId($team);
 
-        // No get so get current team
-        if($team_id === null)
-        {
-            $team_id = $this->currentTeam->id;
-        }
-
-        // Get Current Role ID
-        $team_model   = Config::get( 'teamwork.team_model' );
-        $team = ( new $team_model() )->find($team_id);
-
-        $role_id = $team->userRoles()->wherePivot('user_id', $this->id)->first()->pivot->team_role_id;
-
-        $this->teamRoles()->wherePivot('team_id', $team_id)->detach($role_id);
-
-        if($this->relationLoaded('teamRoles'))
-        {
-            $this->load('teamRoles');            
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add a role for a team to a user
-     *
-     * @param integer $team_role_id
-     * @param mixed $team_id
-     * @return \App\User
-     */
-    public function attachTeamRole($team_role_id, $team_id = null)
-    {
-        $team_id = $this->retrieveTeamId($team_id);
-
-        // No get so get current team
+        // No team provider so get currentTeam
         if($team_id === null)
         {
             $team_id = $this->currentTeam->id;
@@ -130,7 +100,7 @@ trait UsedByUsers
         $team_model   = Config::get( 'teamwork.team_model' );
         $team = ( new $team_model() )->find($team_id);
 
-        // Check if user is in the team
+        // Check if in in team
         if(!$team->users->contains( $this->id ))
         {
             $exception = new UserNotInTeamException();
@@ -138,21 +108,11 @@ trait UsedByUsers
             throw $exception;
         }
 
-        // Check if user has role
-        $currentTeamRole = $this->teamRoles()->wherePivot('team_id', $team_id)->first();
-        if($currentTeamRole)
-        {
-            // Remove current person's role
-            $this->detachTeamRole($team_id);
-        }
+        // Get TeamRole Model instance
+        $team_role = TeamRole::find($team_role);
 
-        // Attach person to
-        $this->teamRoles()->attach($team_role_id, ['team_id'=>$team_id]);
-
-        if($this->relationLoaded('teamRoles'))
-        {
-            $this->load('teamRoles');            
-        }
+        // Save TeamRole to pivot
+        $team->users()->updateExistingPivot($this->id, ['team_role_id'=>$team_role->id]);
 
         return $this;
     }

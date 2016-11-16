@@ -34,7 +34,7 @@ class TeamRoleMembersController extends Controller
         $team = Team::findOrFail($team_id);
         $user = User::findOrFail($user_id);
 
-        $user->attachTeamRole($request->role, $team);
+        $user->updateTeamRole($request->role, $team);
 
         return redirect(route('teamroles.members.show', $team_id));
     }

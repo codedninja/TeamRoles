@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'admin/teamroles'], function() {
+Route::group(['prefix' => 'admin/teamroles', 'middleware'=>'auth'], function() {
     // Admin of all team roles
     Route::get('/', 'AdminTeamRoleController@index')->name('admin.teamroles.index');
     Route::get('create', 'AdminTeamRoleController@create')->name('admin.teamroles.create');
@@ -10,7 +10,7 @@ Route::group(['prefix' => 'admin/teamroles'], function() {
     Route::delete('{id}/destroy', 'AdminTeamRoleController@destroy')->name('admin.teamroles.destroy');
 });
 
-Route::group(['prefix' => 'teamroles'], function() {
+Route::group(['prefix' => 'teamroles', 'middleware'=>'auth'], function() {
     // Team Routes
     Route::get('/', 'TeamRoleController@index')->name('teamroles.index');
     Route::get('/create', 'TeamRoleController@create')->name('teamroles.create');

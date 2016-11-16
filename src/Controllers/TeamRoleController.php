@@ -29,7 +29,7 @@ class TeamRoleController extends Controller
         ]);
         
         $request->user()->attachTeam($team);
-        $request->user()->attachTeamRole(1, $team); // Attach User as the owner of the group
+        $request->user()->updateTeamRole(1, $team); // Attach User as the owner of the group
 
         return redirect(route('teamroles.index'));
     }
