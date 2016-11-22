@@ -11,8 +11,6 @@ Pull this package in through Composer (file `composer.json`).
 ```js
 {
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": "5.1.*",
         "tehcodedninja/teamroles": "1.1.0"
     }
 }
