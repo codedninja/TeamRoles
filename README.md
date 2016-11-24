@@ -11,7 +11,7 @@ Pull this package in through Composer (file `composer.json`).
 ```js
 {
     "require": {
-        "tehcodedninja/teamroles": "1.1.0"
+        "tehcodedninja/teamroles": "1.0.3-alpha"
     }
 }
 ```
